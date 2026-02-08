@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine for Tannistha</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  z-index: 2;
+  text-align: center;
+}
+
+h1 {
+  color: white;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  margin-bottom: 30px;
+}
+
+button {
+  padding: 15px 35px;
+  font-size: 20px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+#yes {
+  background: #ff2e63;
+  color: white;
+  margin-right: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+#no {
+  position: absolute;
+  background: #f1f1f1;
+  color: #555;
+}
+
+/* Floating items */
+.float {
+  position: absolute;
+  font-size: 28px;
+  animation: floatUp 8s linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Will you be my Valentines,<br><strong>Tannistha</strong>? 💖</h1>
+
+  <button id="yes">YES 💕</button>
+  <button id="no">NO 🙈</button>
+</div>
+
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* NO button escape */
+const noBtn = document.getElementById("no");
+function moveNo() {
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 60);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+
+/* Floating hearts, teddies, chocolates */
+const items = ["❤️", "🧸", "🍫"];
+
+function createFloat() {
+  const el = document.createElement("div");
+  el.className = "float";
+  el.innerHTML = items[Math.floor(Math.random() * items.length)];
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.animationDuration = (5 + Math.random() * 5) + "s";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 9000);
+}
+
+setInterval(createFloat, 400);
+
+/* YES click celebration */
+document.getElementById("yes").onclick = () => {
+  document.body.innerHTML = `
+    <div class="container">
+      <h1>YAY!!! 💕🎉</h1>
+      <h1>Tannistha, you just made me the happiest person 💖</h1>
+      <h1>Happy Valentine’s Day 😘</h1>
+    </div>
+  `;
+};
+</script>
+
+</body>
+</html>
